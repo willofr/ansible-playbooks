@@ -1,0 +1,55 @@
+---
+- hosts: windows
+  tasks:
+    - name: Disable Windows Defender Real Time Monitoring
+      win_command: powershell.exe -
+      args:
+        stdin: Set-MpPreference -DisableRealtimeMonitoring 1
+          
+    - name: Create temporary update directory
+      win_file:
+        path: c:\temp\update
+        state: directory
+    
+    - name: Download SSU KB4524569
+      win_get_url:
+        url: http://10.64.10.2/update/windows10.0-kb4524569-x64_9004236e081c22b1e10c4bc94279bf6e75cd299a.msu
+        dest: c:\temp\update\KB4524569.msu
+        checksum_url: http://10.64.10.2/update/checksum.txt
+        checksum_algorithm: sha256
+    
+    - name: Install SSU KB4524569
+      win_hotfix:
+        hotfix_kb: KB4524569
+        source: c:\temp\update\KB4524569.msu
+        state: present
+      register: hotfix_result
+    
+    - name: Download KB4524570 - November patch tuesday
+      win_get_url:
+        url: http://10.64.10.2/update/windows10.0-kb4524570-x64_bdd4583a9f921ceeb27dc8529aa8faa9023a8f98.msu
+        dest: c:\temp\update\KB4524570.msu
+        checksum_url: http://10.64.10.2/update/checksum.txt
+        checksum_algorithm: sha256
+    
+    - name: Install November cumulative hotfix for Win10 1903
+      win_hotfix:
+        hotfix_kb: KB4524570
+        source: c:\temp\update\KB4524570.msu
+        state: present
+      register: hotfix_result
+
+    - name: remove temporary update directory
+      win_file:
+        path: c:\temp\update
+        state: absent
+    
+    - name: Re-enable Windows Defender Real Time Monitoring
+      win_command: powershell.exe -
+      args:
+        stdin: Set-MpPreference -DisableRealtimeMonitoring 0    
+    
+    - name: Reboot host if frequired
+      win_reboot:
+        pre_reboot_delay: 15
+      when: hotfix_result.reboot_required
