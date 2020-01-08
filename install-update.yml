@@ -1,5 +1,5 @@
 ---
-- hosts: windows
+- hosts: all
   tasks:
     - name: Disable Windows Defender Real Time Monitoring
       win_command: powershell.exe -
