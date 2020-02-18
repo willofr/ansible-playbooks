@@ -4,4 +4,3 @@
     - name: wsusscan.ps1
       wsusscan:
       register: result
-      
