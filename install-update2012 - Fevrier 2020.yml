@@ -1,0 +1,50 @@
+---
+- hosts: all
+  tasks:
+    - name: Create temporary update directory
+      win_file:
+        path: c:\temp\update
+        state: directory
+    
+    - name: Download SSU KB4524445
+      win_get_url:
+        url: http://10.64.10.2/update/windows8.1-kb4524445-x64_a8a5b5fd641b016e8ee0636c1dde808e98656d3a.msu
+        dest: c:\temp\update\KB4524445.msu
+        checksum_url: http://10.64.10.2/update/checksum.txt
+        checksum_algorithm: sha256
+    
+    - name: Install SSU KB4524445 
+      win_hotfix:
+        hotfix_kb: KB4524445
+        source: c:\temp\update\KB4524445.msu
+        state: present
+      register: hotfix_result
+    
+    - name: Download kb4537821 - February patch tuesday
+      win_get_url:
+        url: http://10.64.10.2/update/windows8.1-kb4537821-x64_26e968d5eb4c77b264aac60565290d2f5552778a.msu
+        dest: c:\temp\update\kb4537821.msu
+        checksum_url: http://10.64.10.2/update/checksum.txt
+        checksum_algorithm: sha256
+    
+    - name: Install December kb4537821 cumulative hotfix for Windows Server 2012 R2
+      win_hotfix:
+        hotfix_kb: kb4537821
+        source: c:\temp\update\kb4537821.msu
+        state: present
+      register: hotfix_result
+
+    - name: remove temporary update directory
+      win_file:
+        path: c:\temp\update
+        state: absent
+    
+        #    - name: Re-enable Windows Defender Real Time Monitoring
+        #win_command: powershell.exe -
+        #args:
+        #stdin: Set-MpPreference -DisableRealtimeMonitoring 0    
+    
+    - name: Reboot host if frequired
+      win_reboot:
+        pre_reboot_delay: 15
+      when: hotfix_result.reboot_required
