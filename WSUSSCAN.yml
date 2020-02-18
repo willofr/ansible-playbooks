@@ -2,6 +2,6 @@
 - hosts: all
   tasks:
     - name: wsusscan.ps1
-      wsusscan.ps1:
+      wsusscan:
       register: result
       
