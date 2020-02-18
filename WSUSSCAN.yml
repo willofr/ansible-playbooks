@@ -1,6 +1,7 @@
 ---
-- hosts: all
+- name: test scan wsusscan
+  hosts: all
   tasks:
-    - name: wsusscan.ps1
-      wsusscan:
-      register: result
+  - name: test dev wsusscan
+    win_wsusscn2:
+      name: test name
