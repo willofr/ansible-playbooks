@@ -1,7 +1,6 @@
 ---
-- name: test scan wsusscan
-  hosts: all
+- hosts: all
   tasks:
-  - name: test dev wsusscan
-    win_wsusscn2:
-      name: test name
+    - name: Scan avec wsusscn2.cab
+      wsusscn2:
+        name: Scan wsusscn2
