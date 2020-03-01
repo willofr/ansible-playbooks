@@ -20,7 +20,7 @@
         state: present
       register: hotfix_result
     
-    - name: Download {{KB_Number }} - {{ Month }} patch tuesday
+    - name: Download {{ KB_Number }} - {{ Month }} patch tuesday
       win_get_url:
         url: {{ http_server }}/{{ KB_File }}
         dest: {{ update_directory}}/{{ KB_File }}
