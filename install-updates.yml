@@ -13,7 +13,7 @@
         checksum_url: "{{ Checksum_url_file }}"
         checksum_algorithm: sha256
     
-    - name: Install "{{ SSU_KB_Number }}"
+    - name: Install SSU "{{ SSU_KB_Number }}"
       win_hotfix:
         hotfix_kb: "{{ SSU_KB_Number }}"
         source: "{{ update_directory}}{{ SSU_KB_File }}"
