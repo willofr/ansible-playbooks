@@ -8,8 +8,8 @@
     
     - name: Download SSU {{ SSU_KB_Number }}
       win_get_url:
-        url: {{ http_server }}{{ SSU_KB_File }}
-        dest: {{ update_directory}}{{ SSU_KB_File }}
+        url: "{{ http_server }}{{ SSU_KB_File }}"
+        dest: "{{ update_directory}}{{ SSU_KB_File }}"
         checksum_url: "{{ Checksum_url_file }}"
         checksum_algorithm: sha256
     
