@@ -39,11 +39,6 @@
         path: {{ update_directory}}
         state: absent
     
-        #    - name: Re-enable Windows Defender Real Time Monitoring
-        #win_command: powershell.exe -
-        #args:
-        #stdin: Set-MpPreference -DisableRealtimeMonitoring 0    
-    
     - name: Reboot host if frequired
       win_reboot:
         pre_reboot_delay: 15
