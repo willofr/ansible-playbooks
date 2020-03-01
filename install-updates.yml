@@ -9,28 +9,28 @@
     - name: Download SSU "{{ SSU_KB_Number }}"
       win_get_url:
         url: "{{ http_server }}"/"{{ SSU_KB_File }}"
-        dest: "{{ update_directory}}"/"{{ SSU_KB_File }}"
+        dest: "{{ update_directory}}"\"{{ SSU_KB_File }}"
         checksum_url: "{{ Checksum_url_file }}"
         checksum_algorithm: sha256
     
     - name: Install "{{ SSU_KB_Number }}"
       win_hotfix:
         hotfix_kb: "{{ SSU_KB_Number }}"
-        source: "{{ update_directory}}"/"{{ SSU_KB_File }}"
+        source: "{{ update_directory}}"\"{{ SSU_KB_File }}"
         state: present
       register: hotfix_result
     
     - name: Download "{{ KB_Number }}" - "{{ Month }}" patch tuesday
       win_get_url:
         url: "{{ http_server }}"/"{{ KB_File }}"
-        dest: "{{ update_directory}}"/"{{ KB_File }}"
+        dest: "{{ update_directory}}"\"{{ KB_File }}"
         checksum_url: "{{ Checksum_url_file }}"
         checksum_algorithm: sha256
     
     - name: Install "{{ KB_Number }}" - "{{ Month }}" cumulative hotfix for "{{ Win_Version }}"
       win_hotfix:
         hotfix_kb: "{{ KB_Number }}"
-        source: "{{ update_directory}}"/"{{ KB_File }}"
+        source: "{{ update_directory}}"\"{{ KB_File }}"
         state: present
       register: hotfix_result
 
