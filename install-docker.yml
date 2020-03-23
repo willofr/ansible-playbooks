@@ -1,12 +1,12 @@
 ---
 - tasks:
-- name: Enabling Docker-CE repository
+  - name: Enabling Docker-CE repository
   get_url:
     url: "https://download.docker.com/linux/centos/docker-ce.repo"
     dest: /etc/yum.repos.d/docker-ce.repo
     mode: 0644
 
-- name: Install the dependencies
+  - name: Install the dependencies
   yum:
     name: "{{ item }}"
     update_cache: yes
@@ -16,13 +16,13 @@
     - python-pip
     - docker-ce
 
-- name: Install the docker-py libraries
+  - name: Install the docker-py libraries
   pip:
     name: "{{ item }}"
   with_items:
      - docker-compose==1.24.0
 
-- name: Enable Docker services
+  - name: Enable Docker services
   systemd:
     name: docker.service
     state: started
