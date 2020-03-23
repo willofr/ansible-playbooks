@@ -4,6 +4,7 @@
     - name: Add Docker CE yum repository
       yum_repository:
         name: Docker CE Stable - $basearch
+        file: docker-ce
         baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
         enabled: yes
         gpgcheck: yes
