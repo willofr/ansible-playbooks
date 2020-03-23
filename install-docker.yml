@@ -2,10 +2,9 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: Add Docker CE yum repository
+    - name: Add Docker-CE yum repository
       yum_repository:
         name: Docker CE Stable - $basearch
-        file: docker-ce
         description: Docker CE repo
         baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
         enabled: yes
