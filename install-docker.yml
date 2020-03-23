@@ -19,6 +19,7 @@
         - gcc
         - python3-devel
         - python3-pip
+        - python3-setuptools
         - docker-ce
       
     - name: Install the docker-py libraries
