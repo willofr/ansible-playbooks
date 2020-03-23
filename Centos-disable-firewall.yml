@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Disable firewall
+      systemd:
+        name: firewalld.service
+        state: stopped
+        enabled: no
