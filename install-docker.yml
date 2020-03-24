@@ -2,6 +2,12 @@
 - hosts: all
   gather_facts: no
   tasks:
+    - name: Disable firewall
+      systemd:
+        name: firewalld.service
+        state: stopped
+        enabled: no
+        
     - name: Add Docker-CE yum repository
       yum_repository:
         name: Docker-CE
