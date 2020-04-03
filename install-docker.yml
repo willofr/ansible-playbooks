@@ -25,8 +25,8 @@
       vars:
         packages:
         - gcc
-        - python3-devel
-        - python3-pip
+        - python-devel
+        - python-pip
         - python-setuptools
         - docker-ce
       
@@ -34,7 +34,7 @@
       pip:
         name: 
           - docker-compose==1.24.0
-        executable: pip3
+#        executable: pip3
 
     - name: Enable Docker services
       systemd:
