@@ -31,7 +31,7 @@
         packages:
         - gcc
         - python-devel
-#        - python-pip
+        - python-pip
         - python-setuptools
         - docker-ce
       
