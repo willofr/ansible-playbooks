@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Start all services
+      docker_compose:
+        project_src: "/var/lib/awx/build_image/"
+        build: no
+      register: output
