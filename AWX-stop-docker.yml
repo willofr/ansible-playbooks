@@ -1,0 +1,6 @@
+- name: Stop all services
+      docker_compose:
+        project_src: "/var/lib/awx/build_image/"
+        build: no
+        stopped: yes
+      register: output
